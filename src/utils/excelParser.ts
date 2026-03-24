@@ -13,7 +13,6 @@ export const parseExcelFile = (file: File): Promise<ParsedExcel> => {
         let dataSheet: { sheetName: string; data: SurveyRecord[] } | null = null;
         let codeBookSheet: { sheetName: string; data: CodeBookEntry[] } | null = null;
         
-        // Iterar per totes les pestanyes per detectar-les automàticament
         for (const sheetName of workbook.SheetNames) {
           const worksheet = workbook.Sheets[sheetName];
           const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as any[];
@@ -23,7 +22,6 @@ export const parseExcelFile = (file: File): Promise<ParsedExcel> => {
           const headers = jsonData[0] as string[];
           const rows = jsonData.slice(1).filter(row => row.length > 0);
           
-          // Detectar si és el llibre de codis (té "Etiqueta" i "Codi")
           const hasEtiqueta = headers.some(h => 
             String(h).toLowerCase().includes('etiqueta') || 
             String(h).toLowerCase().includes('categoria')
@@ -34,7 +32,6 @@ export const parseExcelFile = (file: File): Promise<ParsedExcel> => {
           );
           
           if (hasEtiqueta && hasCodi && !codeBookSheet) {
-            // És el llibre de codis
             const etiquetaIdx = headers.findIndex(h => 
               String(h).toLowerCase().includes('etiqueta') || 
               String(h).toLowerCase().includes('categoria')
@@ -46,20 +43,17 @@ export const parseExcelFile = (file: File): Promise<ParsedExcel> => {
             
             const entries: CodeBookEntry[] = rows.map(row => ({
               Etiqueta: String(row[etiquetaIdx] || ''),
-              Codi: row[codiIdx] || ''
+              Codi: String(row[codiIdx] || '')
             })).filter(e => e.Etiqueta && e.Codi);
             
             codeBookSheet = { sheetName, data: entries };
-          } 
-          // Detectar si és la pestanya de dades (té "LITERAL" o "VARIABLE")
-          else if ((headers.includes('LITERAL') || headers.includes('VARIABLE')) && !dataSheet) {
+          } else if ((headers.includes('LITERAL') || headers.includes('VARIABLE')) && !dataSheet) {
             const data: SurveyRecord[] = rows.map(row => {
               const obj: any = {};
               headers.forEach((header, idx) => {
                 obj[header] = row[idx];
               });
               
-              // Normalitzar IGUAL a boolean
               if (obj['IGUAL'] !== undefined) {
                 obj['IGUAL'] = obj['IGUAL'] === true || 
                                obj['IGUAL'] === 'true' || 
@@ -95,7 +89,7 @@ export const parseExcelFile = (file: File): Promise<ParsedExcel> => {
     };
     
     reader.onerror = () => reject(new Error('Error llegint l\'arxiu'));
-    reader.readAsBinaryString(file);
+    reader.readAsArrayBuffer(file);
   });
 };
 
@@ -107,14 +101,11 @@ export const exportToExcel = (
 ): void => {
   const wb = XLSX.utils.book_new();
   
-  // Fulla de dades corregides
   const wsData = XLSX.utils.json_to_sheet(data);
   XLSX.utils.book_append_sheet(wb, wsData, originalSheetName);
   
-  // Fulla de codis (per referència)
   const wsCodes = XLSX.utils.json_to_sheet(codeBook);
   XLSX.utils.book_append_sheet(wb, wsCodes, codeBookSheetName);
   
-  // Descarregar
   XLSX.writeFile(wb, `codificacio_corregida_${new Date().toISOString().split('T')[0]}.xlsx`);
 };
