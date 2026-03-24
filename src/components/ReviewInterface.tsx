@@ -24,9 +24,7 @@ export const ReviewInterface: React.FC<ReviewInterfaceProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showOnlyMismatches, setShowOnlyMismatches] = useState(false);
-  const [selectedCodeEntry, setSelectedCodeEntry] = useState<CodeBookEntry | null>(null);
 
-  // Filtrar dades si cal
   const filteredIndices = showOnlyMismatches 
     ? data.map((r, i) => !r.IGUAL ? i : -1).filter(i => i !== -1)
     : data.map((_, i) => i);
@@ -35,11 +33,18 @@ export const ReviewInterface: React.FC<ReviewInterfaceProps> = ({
   const currentRecord = data[effectiveIndex];
   const totalFiltered = filteredIndices.length;
 
-  // Navegació per teclat
+  const goNext = useCallback(() => {
+    setCurrentIndex(prev => Math.min(prev + 1, totalFiltered - 1));
+  }, [totalFiltered]);
+
+  const goPrev = useCallback(() => {
+    setCurrentIndex(prev => Math.max(prev - 1, 0));
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
-        return; // No interferir amb inputs
+        return;
       }
       
       switch(e.key) {
@@ -65,17 +70,9 @@ export const ReviewInterface: React.FC<ReviewInterfaceProps> = ({
     
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex, totalFiltered, showOnlyMismatches]);
+  }, [goNext, goPrev, totalFiltered]);
 
-  const goNext = useCallback(() => {
-    setCurrentIndex(prev => Math.min(prev + 1, totalFiltered - 1));
-  }, [totalFiltered]);
-
-  const goPrev = useCallback(() => {
-    setCurrentIndex(prev => Math.max(prev - 1, 0));
-  }, []);
-
-  const handleUpdate = (index: number, category: string, code: string | number) => {
+  const handleUpdate = (index: number, category: string, code: string) => {
     onUpdateRecord(index, {
       'Categoria definitiva': category,
       'CODI': code,
@@ -89,7 +86,6 @@ export const ReviewInterface: React.FC<ReviewInterfaceProps> = ({
 
   const handleSelectFromSidebar = (entry: CodeBookEntry) => {
     handleUpdate(effectiveIndex, entry.Etiqueta, entry.Codi);
-    setSelectedCodeEntry(entry);
   };
 
   if (!currentRecord) {
@@ -102,11 +98,9 @@ export const ReviewInterface: React.FC<ReviewInterfaceProps> = ({
 
   return (
     <div className="flex h-screen bg-gray-50">
-      {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         <StatsBar data={data} currentIndex={effectiveIndex} />
         
-        {/* Toolbar */}
         <div className="bg-white border-b border-gray-200 px-6 py-2 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <button
@@ -136,7 +130,6 @@ export const ReviewInterface: React.FC<ReviewInterfaceProps> = ({
           </button>
         </div>
 
-        {/* Card container */}
         <div className="flex-1 overflow-y-auto p-6">
           <div className="max-w-4xl mx-auto">
             <DataCard
@@ -148,7 +141,6 @@ export const ReviewInterface: React.FC<ReviewInterfaceProps> = ({
               onAddComment={handleAddComment}
             />
             
-            {/* Navigation buttons */}
             <div className="flex items-center justify-between mt-6">
               <button
                 onClick={goPrev}
@@ -176,7 +168,6 @@ export const ReviewInterface: React.FC<ReviewInterfaceProps> = ({
         </div>
       </div>
       
-      {/* Sidebar */}
       <CodeBookSidebar 
         codeBook={codeBook}
         onSelectCode={handleSelectFromSidebar}
