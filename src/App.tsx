@@ -47,7 +47,7 @@ function App() {
               <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                 <FileSpreadsheet className="w-5 h-5 text-blue-600" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">1. Pujau l'Excel</h3>
+              <h3 className="font-semibold text-gray-900 mb-2">1. Puja l'Excel</h3>
               <p className="text-sm text-gray-600">
                 Arrossega o selecciona l'arxiu amb les dues pestanyes: <strong>"Dades"</strong> i <strong>"Llibre de Codis"</strong>.
               </p>
@@ -57,7 +57,7 @@ function App() {
               <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
                 <span className="text-amber-600 font-bold text-lg">✎</span>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">2. Revisau ràpidament</h3>
+              <h3 className="font-semibold text-gray-900 mb-2">2. Revisa ràpidament</h3>
               <p className="text-sm text-gray-600">
                 Navega amb les fletxes. Corregiu categories amb el cercador o el llibre de codis lateral.
               </p>
@@ -67,7 +67,7 @@ function App() {
               <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                 <span className="text-green-600 font-bold text-lg">⬇</span>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">3. Exportau</h3>
+              <h3 className="font-semibold text-gray-900 mb-2">3. Exporta</h3>
               <p className="text-sm text-gray-600">
                 Descarrega l'Excel amb les correccions aplicades a "Categoria definitiva" i "CODI".
               </p>
