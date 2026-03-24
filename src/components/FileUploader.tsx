@@ -58,10 +58,17 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
                 Arrossega o selecciona l'arxiu Excel
               </h3>
               <p className="text-sm text-gray-600 mb-4">
-                L'arxiu ha de contenir 2 pestanyes:<br/>
-                <span className="font-medium text-blue-700">Dades</span> (amb columna LITERAL) i 
-                <span className="font-medium text-blue-700"> Llibre de codis</span> (amb Etiqueta + Codi)
+                L'arxiu ha de contenir exactament 2 pestanyes:<br/>
+                <span className="font-medium text-blue-700">"Dades"</span> (amb columna LITERAL) i 
+                <span className="font-medium text-blue-700"> "Llibre de Codis"</span> (amb Etiqueta + Codi)
               </p>
+              <div className="bg-blue-100 rounded-lg p-3 mb-4 text-left max-w-md mx-auto">
+                <p className="text-xs text-blue-800 font-medium mb-1">Estructura requerida:</p>
+                <ul className="text-xs text-blue-700 space-y-1 list-disc list-inside">
+                  <li>Pestanya "Dades": REGISTRO, VARIABLE, LITERAL, Predicted Category, etc.</li>
+                  <li>Pestanya "Llibre de Codis": Etiqueta, Codi</li>
+                </ul>
+              </div>
               <span className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
                 <Upload className="w-4 h-4 mr-2" />
                 Seleccionar arxiu
