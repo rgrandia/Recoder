@@ -8,7 +8,7 @@ interface DataCardProps {
   index: number;
   total: number;
   codeBook: CodeBookEntry[];
-  onUpdate: (index: number, category: string, code: string | number) => void;
+  onUpdate: (index: number, category: string, code: string) => void;
   onAddComment: (index: number, comment: string) => void;
 }
 
@@ -64,7 +64,6 @@ export const DataCard: React.FC<DataCardProps> = ({
       bg-white rounded-xl shadow-lg border-2 p-6 mb-4 transition-all
       ${isMismatch ? 'border-amber-400 shadow-amber-100' : 'border-gray-200'}
     `}>
-      {/* Header */}
       <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
         <div className="flex items-center space-x-3">
           <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm font-mono">
@@ -92,7 +91,6 @@ export const DataCard: React.FC<DataCardProps> = ({
         </div>
       </div>
 
-      {/* Text literal - EL ELEMENT PRINCIPAL */}
       <div className="mb-6">
         <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 block">
           Resposta oberta (LITERAL)
@@ -102,7 +100,6 @@ export const DataCard: React.FC<DataCardProps> = ({
         </div>
       </div>
 
-      {/* Predicted vs Current */}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="bg-blue-50 rounded-lg p-3 border border-blue-100">
           <label className="text-xs text-blue-600 font-medium mb-1 block">Predicció automàtica</label>
@@ -167,7 +164,6 @@ export const DataCard: React.FC<DataCardProps> = ({
         </div>
       </div>
 
-      {/* Comment section */}
       {showComment && (
         <div className="mt-4 pt-4 border-t border-gray-100 animate-fade-in">
           <textarea
@@ -195,7 +191,6 @@ export const DataCard: React.FC<DataCardProps> = ({
         </div>
       )}
 
-      {/* Quick actions */}
       {!isEditing && (
         <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-100">
           <span className="text-xs text-gray-500 mr-2 py-1">Correcció ràpida:</span>
