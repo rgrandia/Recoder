@@ -32,7 +32,7 @@ function App() {
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Eina per a la revisió ràpida de codificació de respostes obertes. 
-              Pujau un Excel amb les pestanyes de <strong>Resultados</strong> i <strong>Codis</strong>.
+              Pujau un Excel amb les pestanyes <strong>"Dades"</strong> i <strong>"Llibre de Codis"</strong>.
             </p>
           </div>
           
@@ -49,7 +49,7 @@ function App() {
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">1. Pujau l'Excel</h3>
               <p className="text-sm text-gray-600">
-                Arrossega o selecciona l'arxiu amb les dues pestanyes: dades i llibre de codis.
+                Arrossega o selecciona l'arxiu amb les dues pestanyes: <strong>"Dades"</strong> i <strong>"Llibre de Codis"</strong>.
               </p>
             </div>
             
