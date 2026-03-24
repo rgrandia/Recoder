@@ -8,7 +8,7 @@ export const parseExcelFile = (file: File): Promise<ParsedExcel> => {
     reader.onload = (e) => {
       try {
         const data = e.target?.result;
-        const workbook = XLSX.read(data, { type: 'binary' });
+        const workbook = XLSX.read(data, { type: 'array' });
         
         let dataSheet: { sheetName: string; data: SurveyRecord[] } | null = null;
         let codeBookSheet: { sheetName: string; data: CodeBookEntry[] } | null = null;
