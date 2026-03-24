@@ -1,8 +1,8 @@
 import Fuse from 'fuse.js';
 import { CodeBookEntry } from '../types';
 
-export const createFuzzySearch = (codeBook: CodeBookEntry[]) => {
-  return new Fuse(codeBook, {
+export const createFuzzySearch = (codeBook: CodeBookEntry[]): Fuse<CodeBookEntry> => {
+  return new Fuse<CodeBookEntry>(codeBook, {
     keys: ['Etiqueta'],
     threshold: 0.4,
     includeScore: true,
