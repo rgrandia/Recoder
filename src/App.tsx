@@ -32,7 +32,7 @@ function App() {
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Eina per a la revisió ràpida de codificació de respostes obertes. 
-              Pujau un Excel amb les pestanyes <strong>"Dades"</strong> i <strong>"Llibre de Codis"</strong>.
+              Puja un Excel amb les pestanyes <strong>"Dades"</strong> i <strong>"Llibre de Codis"</strong>.
             </p>
           </div>
           
@@ -59,7 +59,7 @@ function App() {
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">2. Revisau ràpidament</h3>
               <p className="text-sm text-gray-600">
-                Navegau amb les fletxes. Corregiu categories amb el cercador o el llibre de codis lateral.
+                Navega amb les fletxes. Corregiu categories amb el cercador o el llibre de codis lateral.
               </p>
             </div>
             
@@ -69,7 +69,7 @@ function App() {
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">3. Exportau</h3>
               <p className="text-sm text-gray-600">
-                Descarregau l'Excel amb les correccions aplicades a "Categoria definitiva" i "CODI".
+                Descarrega l'Excel amb les correccions aplicades a "Categoria definitiva" i "CODI".
               </p>
             </div>
           </div>
