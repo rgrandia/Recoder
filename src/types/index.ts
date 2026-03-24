@@ -8,17 +8,17 @@ export interface SurveyRecord {
   CODI: string | number;
   IGUAL: boolean | string;
   Comentaris?: string;
-  [key: string]: any; // Altres columnes possibles
+  [key: string]: any;
 }
 
 export interface CodeBookEntry {
   Etiqueta: string;
-  Codi: string | number;
+  Codi: string;
 }
 
 export interface ReviewState {
   correctedCategory: string;
-  correctedCode: string | number;
+  correctedCode: string;
   isReviewed: boolean;
 }
 
