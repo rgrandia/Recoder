@@ -23,7 +23,6 @@ export const CodeBookSidebar: React.FC<CodeBookSidebarProps> = ({
     return fuse.search(searchQuery, { limit: 20 }).map(r => r.item);
   }, [fuse, searchQuery, codeBook]);
 
-  // Agrupar per centenes per mostrar més organitzat
   const groupedCodes = useMemo(() => {
     const groups: { [key: string]: CodeBookEntry[] } = {};
     filteredCodes.forEach(code => {
